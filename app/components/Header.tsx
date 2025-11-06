@@ -2,6 +2,7 @@
 
 import { Wallet } from 'lucide-react';
 import { ThemeSwitcher } from './ThemeSwitcher';
+import { useTheme } from './ThemeProvider';
 
 interface HeaderProps {
   isConnected: boolean;
@@ -9,16 +10,23 @@ interface HeaderProps {
 }
 
 export function Header({ isConnected, onConnect }: HeaderProps) {
+  const { theme } = useTheme();
+  const isRetro = theme === 'retro';
+
   return (
     <header className="sticky top-0 z-50 glass-effect border-b border-[var(--color-border)]">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center">
-              <span className="text-xl font-bold">Y</span>
+            <div className={`w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center ${
+              isRetro ? 'retro-pulse' : ''
+            }`}>
+              <span className={`text-xl font-bold ${isRetro ? 'neon-text' : ''}`}>Y</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold">YieldSense</h1>
+              <h1 className={`text-xl font-bold ${isRetro ? 'retro-gradient-text' : ''}`}>
+                YieldSense
+              </h1>
               <p className="text-xs text-fg/60">BSC DeFi Optimizer</p>
             </div>
           </div>
@@ -30,7 +38,7 @@ export function Header({ isConnected, onConnect }: HeaderProps) {
               className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
                 isConnected
                   ? 'bg-success/20 text-success border border-success/30'
-                  : 'bg-accent hover:bg-accent/90 text-white glow-accent'
+                  : `bg-accent hover:bg-accent/90 text-white glow-accent ${isRetro ? 'retro-button' : ''}`
               }`}
             >
               <Wallet className="w-5 h-5" />

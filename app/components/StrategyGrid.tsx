@@ -1,6 +1,7 @@
 'use client';
 
 import { Shield, TrendingUp, AlertTriangle } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
 interface StrategyGridProps {
   isConnected: boolean;
@@ -46,6 +47,9 @@ const strategies = [
 ];
 
 export function StrategyGrid({ isConnected }: StrategyGridProps) {
+  const { theme } = useTheme();
+  const isRetro = theme === 'retro';
+
   const getRiskIcon = (risk: string) => {
     switch (risk) {
       case 'low':
@@ -77,14 +81,18 @@ export function StrategyGrid({ isConnected }: StrategyGridProps) {
       {strategies.map((strategy) => (
         <div
           key={strategy.id}
-          className="glass-effect rounded-lg p-6 hover:glow-accent transition-all duration-300"
+          className={`glass-effect rounded-lg p-6 hover:glow-accent transition-all duration-300 ${
+            isRetro ? 'retro-card' : ''
+          }`}
         >
           <div className="flex items-start gap-4 mb-4">
-            <div className="p-3 bg-surface rounded-lg">
+            <div className={`p-3 bg-surface rounded-lg ${isRetro ? 'glow-primary' : ''}`}>
               {getRiskIcon(strategy.risk)}
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-semibold mb-2">{strategy.name}</h3>
+              <h3 className={`text-xl font-semibold mb-2 ${isRetro ? 'text-glow-accent' : ''}`}>
+                {strategy.name}
+              </h3>
               <p className="text-sm text-fg/60">{strategy.description}</p>
             </div>
           </div>
@@ -92,7 +100,9 @@ export function StrategyGrid({ isConnected }: StrategyGridProps) {
           <div className="space-y-3 mb-6">
             <div className="flex justify-between items-center py-2 border-b border-[var(--color-border)]">
               <span className="text-sm text-fg/60">Expected APY</span>
-              <span className="text-lg font-bold text-success">{strategy.expectedAPY}</span>
+              <span className={`text-lg font-bold text-success ${isRetro ? 'text-glow-success' : ''}`}>
+                {strategy.expectedAPY}
+              </span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-[var(--color-border)]">
               <span className="text-sm text-fg/60">Risk Level</span>
@@ -125,7 +135,7 @@ export function StrategyGrid({ isConnected }: StrategyGridProps) {
             disabled={!isConnected}
             className={`w-full py-3 rounded-lg font-medium transition-all duration-200 ${
               isConnected
-                ? 'bg-accent hover:bg-accent/90 text-white'
+                ? `bg-accent hover:bg-accent/90 text-white ${isRetro ? 'retro-button' : ''}`
                 : 'bg-surface text-fg/40 cursor-not-allowed'
             }`}
           >

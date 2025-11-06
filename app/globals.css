@@ -54,6 +54,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Retro theme specific styles */
@@ -79,6 +80,7 @@ a {
     background: rgba(19, 47, 76, 0.6);
     backdrop-filter: blur(12px);
     border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
   }
   
   /* Retro glass effect */
@@ -93,10 +95,12 @@ a {
   
   .glow-accent {
     box-shadow: 0 0 20px rgba(0, 82, 255, 0.3);
+    transition: box-shadow 0.3s ease;
   }
   
   .glow-success {
     box-shadow: 0 0 20px rgba(0, 200, 83, 0.3);
+    transition: box-shadow 0.3s ease;
   }
   
   /* Retro glow effects */
@@ -123,6 +127,24 @@ a {
       0 0 10px rgba(255, 0, 110, 0.6),
       0 0 21px rgba(255, 0, 110, 0.4),
       0 0 42px rgba(131, 56, 236, 0.3);
+    animation: neon-flicker 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow: 
+        0 0 7px rgba(255, 0, 110, 0.8),
+        0 0 10px rgba(255, 0, 110, 0.6),
+        0 0 21px rgba(255, 0, 110, 0.4),
+        0 0 42px rgba(131, 56, 236, 0.3);
+    }
+    20%, 24%, 55% {
+      text-shadow: 
+        0 0 4px rgba(255, 0, 110, 0.6),
+        0 0 7px rgba(255, 0, 110, 0.4),
+        0 0 14px rgba(255, 0, 110, 0.2),
+        0 0 28px rgba(131, 56, 236, 0.2);
+    }
   }
   
   /* Retro scan lines effect */
@@ -147,6 +169,16 @@ a {
     );
     pointer-events: none;
     z-index: 1;
+    animation: scanline-move 8s linear infinite;
+  }
+  
+  @keyframes scanline-move {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(50px);
+    }
   }
   
   /* Retro grid background */
@@ -155,6 +187,16 @@ a {
       linear-gradient(rgba(131, 56, 236, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(131, 56, 236, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+  }
+  
+  @keyframes grid-move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 50px 50px;
+    }
   }
   
   /* Retro button styles */
@@ -164,6 +206,7 @@ a {
     border: 2px solid var(--color-accent);
     box-shadow: var(--glow-accent);
     transition: all 0.3s ease;
+    overflow: hidden;
   }
   
   .retro .retro-button:hover {
@@ -192,12 +235,59 @@ a {
     opacity: 0.7;
   }
   
+  .retro .retro-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .retro .retro-button:hover::after {
+    left: 100%;
+  }
+  
   /* Retro card styles */
   .retro .retro-card {
     position: relative;
     border: 2px solid;
     border-image: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-tertiary)) 1;
     transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .retro .retro-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      transparent,
+      rgba(131, 56, 236, 0.1),
+      transparent 30%
+    );
+    animation: card-rotate 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .retro .retro-card:hover::before {
+    opacity: 1;
+  }
+  
+  @keyframes card-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
   
   .retro .retro-card:hover {
@@ -243,5 +333,70 @@ a {
     50% {
       background-position: 100% 50%;
     }
+  }
+  
+  /* Retro border animation */
+  .retro .retro-border {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+                linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-tertiary)) border-box;
+  }
+  
+  /* Retro glow on hover for cards */
+  .retro .glass-effect:hover {
+    border-color: var(--color-accent);
+    box-shadow: 
+      inset 0 1px 0 0 rgba(255, 0, 110, 0.2),
+      0 4px 30px rgba(131, 56, 236, 0.3),
+      0 0 40px rgba(255, 0, 110, 0.2);
+  }
+  
+  /* Retro loading animation */
+  @keyframes retro-loading {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .retro .retro-loading {
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-accent),
+      var(--color-tertiary),
+      var(--color-accent),
+      var(--color-primary)
+    );
+    background-size: 200% 100%;
+    animation: retro-loading 2s ease infinite;
+  }
+  
+  /* Retro text glow variants */
+  .retro .text-glow-primary {
+    text-shadow: 
+      0 0 5px rgba(131, 56, 236, 0.8),
+      0 0 10px rgba(131, 56, 236, 0.6),
+      0 0 15px rgba(131, 56, 236, 0.4);
+  }
+  
+  .retro .text-glow-accent {
+    text-shadow: 
+      0 0 5px rgba(255, 0, 110, 0.8),
+      0 0 10px rgba(255, 0, 110, 0.6),
+      0 0 15px rgba(255, 0, 110, 0.4);
+  }
+  
+  .retro .text-glow-success {
+    text-shadow: 
+      0 0 5px rgba(6, 255, 165, 0.8),
+      0 0 10px rgba(6, 255, 165, 0.6),
+      0 0 15px rgba(6, 255, 165, 0.4);
   }
 }

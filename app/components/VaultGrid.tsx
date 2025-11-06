@@ -1,6 +1,7 @@
 'use client';
 
 import { TrendingUp, Shield, Lock } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
 interface VaultGridProps {
   isConnected: boolean;
@@ -64,6 +65,9 @@ const vaults = [
 ];
 
 export function VaultGrid({ isConnected }: VaultGridProps) {
+  const { theme } = useTheme();
+  const isRetro = theme === 'retro';
+
   const getRiskColor = (risk: string) => {
     switch (risk) {
       case 'low':
@@ -95,11 +99,15 @@ export function VaultGrid({ isConnected }: VaultGridProps) {
       {vaults.map((vault) => (
         <div
           key={vault.id}
-          className="glass-effect rounded-lg p-6 hover:glow-accent transition-all duration-300 cursor-pointer"
+          className={`glass-effect rounded-lg p-6 hover:glow-accent transition-all duration-300 cursor-pointer ${
+            isRetro ? 'retro-card' : ''
+          }`}
         >
           <div className="flex items-start justify-between mb-4">
             <div>
-              <h3 className="text-lg font-semibold mb-1">{vault.name}</h3>
+              <h3 className={`text-lg font-semibold mb-1 ${isRetro ? 'text-glow-accent' : ''}`}>
+                {vault.name}
+              </h3>
               <p className="text-sm text-fg/60">{vault.protocol}</p>
             </div>
             <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getRiskBg(vault.risk)}`}>
@@ -110,7 +118,9 @@ export function VaultGrid({ isConnected }: VaultGridProps) {
           <div className="space-y-3 mb-6">
             <div className="flex justify-between items-center">
               <span className="text-sm text-fg/60">APY</span>
-              <span className="text-xl font-bold text-success flex items-center gap-1">
+              <span className={`text-xl font-bold text-success flex items-center gap-1 ${
+                isRetro ? 'text-glow-success' : ''
+              }`}>
                 <TrendingUp className="w-4 h-4" />
                 {vault.apy}%
               </span>
@@ -140,7 +150,7 @@ export function VaultGrid({ isConnected }: VaultGridProps) {
             disabled={!isConnected}
             className={`w-full py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
               isConnected
-                ? 'bg-accent hover:bg-accent/90 text-white'
+                ? `bg-accent hover:bg-accent/90 text-white ${isRetro ? 'retro-button' : ''}`
                 : 'bg-surface text-fg/40 cursor-not-allowed'
             }`}
           >
