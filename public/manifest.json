@@ -1,0 +1,14 @@
+{
+  "name": "YieldSense",
+  "description": "YieldSense is a Base Mini App built with Zara.",
+  "image": "https://dummyimage.com/1200x628/0a0b0d/ffffff.png&text=OG",
+  "external_url": "https://e9f04fc4-f318-4ce3-8c81-f0c67679a385.vercel.app",
+  "properties": {
+    "app": {
+      "name": "YieldSense",
+      "description": "YieldSense is a Base Mini App built with Zara.",
+      "url": "https://e9f04fc4-f318-4ce3-8c81-f0c67679a385.vercel.app",
+      "icon": "https://0co.to/images/zara-2.png"
+    }
+  }
+}

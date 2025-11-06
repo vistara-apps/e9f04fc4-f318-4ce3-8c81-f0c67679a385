@@ -7,11 +7,11 @@
   "frame": {
     "version": "1",
     "name": "YieldSense",
-    "homeUrl": "https://yieldsense.app",
+    "homeUrl": "https://app-7679a385-51in.vercel.app",
     "iconUrl": "https://yieldsense.app/icon.png",
     "splashImageUrl": "https://yieldsense.app/splash.png",
     "splashBackgroundColor": "#0a1929",
-    "webhookUrl": "https://yieldsense.app/api/webhook",
+    "webhookUrl": "https://app-7679a385-51in.vercel.app/api/webhook",
     "subtitle": "Intelligent BSC DeFi Yield Optimization",
     "description": "Maximize returns on BSC with automated vaults, risk-adjusted strategies, and tokenized liquidity positions.",
     "screenshotUrls": [
@@ -20,7 +20,13 @@
       "https://yieldsense.app/screenshot3.png"
     ],
     "primaryCategory": "defi",
-    "tags": ["defi", "yield", "bsc", "farming", "liquidity"],
+    "tags": [
+      "defi",
+      "yield",
+      "bsc",
+      "farming",
+      "liquidity"
+    ],
     "heroImageUrl": "https://yieldsense.app/hero.png",
     "tagline": "Intelligent yield optimization and liquidity management for BSC DeFi",
     "ogTitle": "YieldSense - BSC DeFi Yield Optimizer",
