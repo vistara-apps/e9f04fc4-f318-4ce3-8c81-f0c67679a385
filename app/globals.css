@@ -15,6 +15,28 @@
   --color-border: rgba(227, 242, 253, 0.12);
 }
 
+/* Retro Futuristic Theme */
+.retro {
+  /* Neon cyberpunk color palette */
+  --color-bg: #0d0221;
+  --color-fg: #e0fbfc;
+  --color-surface: #1a0b2e;
+  --color-accent: #ff006e;
+  --color-primary: #8338ec;
+  --color-secondary: #3a86ff;
+  --color-tertiary: #06ffa5;
+  --color-success: #06ffa5;
+  --color-danger: #ff006e;
+  --color-warning: #ffbe0b;
+  --color-border: rgba(255, 0, 110, 0.3);
+  
+  /* Retro glow effects */
+  --glow-primary: 0 0 10px rgba(131, 56, 236, 0.5), 0 0 20px rgba(131, 56, 236, 0.3), 0 0 30px rgba(131, 56, 236, 0.2);
+  --glow-accent: 0 0 10px rgba(255, 0, 110, 0.5), 0 0 20px rgba(255, 0, 110, 0.3), 0 0 30px rgba(255, 0, 110, 0.2);
+  --glow-success: 0 0 10px rgba(6, 255, 165, 0.5), 0 0 20px rgba(6, 255, 165, 0.3), 0 0 30px rgba(6, 255, 165, 0.2);
+  --glow-secondary: 0 0 10px rgba(58, 134, 255, 0.5), 0 0 20px rgba(58, 134, 255, 0.3), 0 0 30px rgba(58, 134, 255, 0.2);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -34,6 +56,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Retro theme specific styles */
+.retro body {
+  background: 
+    linear-gradient(180deg, rgba(131, 56, 236, 0.05) 0%, transparent 100%),
+    radial-gradient(ellipse at top, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
+    var(--color-bg);
+  background-attachment: fixed;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -50,11 +81,167 @@ a {
     border: 1px solid var(--color-border);
   }
   
+  /* Retro glass effect */
+  .retro .glass-effect {
+    background: rgba(26, 11, 46, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+    box-shadow: 
+      inset 0 1px 0 0 rgba(255, 0, 110, 0.1),
+      0 4px 20px rgba(131, 56, 236, 0.2);
+  }
+  
   .glow-accent {
     box-shadow: 0 0 20px rgba(0, 82, 255, 0.3);
   }
   
   .glow-success {
     box-shadow: 0 0 20px rgba(0, 200, 83, 0.3);
+  }
+  
+  /* Retro glow effects */
+  .retro .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+  
+  .retro .glow-success {
+    box-shadow: var(--glow-success);
+  }
+  
+  .retro .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .retro .glow-secondary {
+    box-shadow: var(--glow-secondary);
+  }
+  
+  /* Retro neon text */
+  .retro .neon-text {
+    text-shadow: 
+      0 0 7px rgba(255, 0, 110, 0.8),
+      0 0 10px rgba(255, 0, 110, 0.6),
+      0 0 21px rgba(255, 0, 110, 0.4),
+      0 0 42px rgba(131, 56, 236, 0.3);
+  }
+  
+  /* Retro scan lines effect */
+  .retro .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .retro .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* Retro grid background */
+  .retro .grid-bg {
+    background-image: 
+      linear-gradient(rgba(131, 56, 236, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(131, 56, 236, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  /* Retro button styles */
+  .retro .retro-button {
+    position: relative;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    border: 2px solid var(--color-accent);
+    box-shadow: var(--glow-accent);
+    transition: all 0.3s ease;
+  }
+  
+  .retro .retro-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      var(--glow-accent),
+      0 8px 20px rgba(255, 0, 110, 0.4);
+  }
+  
+  .retro .retro-button::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(10px);
+  }
+  
+  .retro .retro-button:hover::before {
+    opacity: 0.7;
+  }
+  
+  /* Retro card styles */
+  .retro .retro-card {
+    position: relative;
+    border: 2px solid;
+    border-image: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-tertiary)) 1;
+    transition: all 0.3s ease;
+  }
+  
+  .retro .retro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 0 30px rgba(131, 56, 236, 0.3),
+      0 0 60px rgba(255, 0, 110, 0.2);
+  }
+  
+  /* Retro pulse animation */
+  @keyframes retro-pulse {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: var(--glow-accent);
+    }
+    50% {
+      opacity: 0.8;
+      box-shadow: 
+        0 0 20px rgba(255, 0, 110, 0.8),
+        0 0 40px rgba(255, 0, 110, 0.5),
+        0 0 60px rgba(131, 56, 236, 0.3);
+    }
+  }
+  
+  .retro .retro-pulse {
+    animation: retro-pulse 2s ease-in-out infinite;
+  }
+  
+  /* Retro gradient text */
+  .retro .retro-gradient-text {
+    background: linear-gradient(135deg, var(--color-tertiary), var(--color-secondary), var(--color-primary), var(--color-accent));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 6s ease infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 }

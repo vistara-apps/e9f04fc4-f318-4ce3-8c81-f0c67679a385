@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme = 'default' | 'celo' | 'solana' | 'base' | 'coinbase'
+type Theme = 'default' | 'celo' | 'solana' | 'base' | 'coinbase' | 'retro'
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -29,13 +29,13 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage?.getItem(storageKey) as Theme) || defaultTheme
+    () => (typeof window !== 'undefined' && localStorage?.getItem(storageKey) as Theme) || defaultTheme
   )
 
   useEffect(() => {
     const root = window.document.documentElement
 
-    root.classList.remove('default', 'celo', 'solana', 'base', 'coinbase')
+    root.classList.remove('default', 'celo', 'solana', 'base', 'coinbase', 'retro')
 
     root.classList.add(theme)
   }, [theme])
@@ -43,7 +43,9 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage?.setItem(storageKey, theme)
+      if (typeof window !== 'undefined') {
+        localStorage?.setItem(storageKey, theme)
+      }
       setTheme(theme)
     },
   }

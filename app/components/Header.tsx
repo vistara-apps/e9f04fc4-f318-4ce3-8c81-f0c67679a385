@@ -1,6 +1,7 @@
 'use client';
 
 import { Wallet } from 'lucide-react';
+import { ThemeSwitcher } from './ThemeSwitcher';
 
 interface HeaderProps {
   isConnected: boolean;
@@ -22,17 +23,20 @@ export function Header({ isConnected, onConnect }: HeaderProps) {
             </div>
           </div>
 
-          <button
-            onClick={onConnect}
-            className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-              isConnected
-                ? 'bg-success/20 text-success border border-success/30'
-                : 'bg-accent hover:bg-accent/90 text-white glow-accent'
-            }`}
-          >
-            <Wallet className="w-5 h-5" />
-            {isConnected ? 'Connected' : 'Connect Wallet'}
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeSwitcher />
+            <button
+              onClick={onConnect}
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                isConnected
+                  ? 'bg-success/20 text-success border border-success/30'
+                  : 'bg-accent hover:bg-accent/90 text-white glow-accent'
+              }`}
+            >
+              <Wallet className="w-5 h-5" />
+              {isConnected ? 'Connected' : 'Connect Wallet'}
+            </button>
+          </div>
         </div>
       </div>
     </header>
